@@ -32,7 +32,7 @@ func main() {
 }
 
 func readInput(fname string) []int {
-	file, err := os.Open("input.txt") // For read access.
+	file, err := os.Open(fname) // For read access.
 	if err != nil {
 		log.Fatal(err)
 	}
