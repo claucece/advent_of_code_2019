@@ -12,6 +12,18 @@ func main() {
 	b := readFileToString("input.txt")
 	n := parse(b, 12, 2)
 	fmt.Printf("%d \n", n)
+
+	for i := 0; i < 100; i++ {
+		for j := 0; j < 100; j++ {
+			m := parse(b, i, j)
+			if m == 19690720 {
+				fmt.Println("\n Success")
+				fmt.Printf("noun %02d , verb %02d", i, j)
+				break
+			}
+		}
+	}
+
 }
 
 func readFileToString(fname string) []int {
@@ -36,6 +48,14 @@ func readFileToString(fname string) []int {
 }
 
 func parse(bytes []int, op int, code int) int {
+	if op < 0 || op > 99 {
+		return 0
+	}
+
+	if code < 0 || code > 99 {
+		return 0
+	}
+
 	c := make([]int, len(bytes))
 	copy(c[:], bytes[:])
 
@@ -62,5 +82,14 @@ func parse(bytes []int, op int, code int) int {
 		}
 	}
 
-	return c[0]
+	value := c[0]
+	wipe(c)
+
+	return value
+}
+
+func wipe(b []int) {
+	for i := range b {
+		b[i] = 0
+	}
 }
