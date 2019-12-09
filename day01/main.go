@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -11,12 +12,23 @@ func main() {
 	data := readInput("input.txt")
 
 	var total int
+	var gTotal int
 
 	for _, mass := range data {
-		fuel := mass/3 - 2
-		total += fuel
+		total += mass/3 - 2
 
+		for {
+			fuel := mass/3 - 2
+			if fuel <= 0 {
+				break
+			}
+			gTotal += fuel
+			mass = fuel
+		}
 	}
+
+	fmt.Printf("\n %d \n", total)
+	fmt.Printf("\n %d \n", gTotal)
 }
 
 func readInput(fname string) []int {
